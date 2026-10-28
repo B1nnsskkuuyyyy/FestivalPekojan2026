@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pekojan Fest Sumpah Pemuda | Karang Taruna Kelurahan Pekojan</title>
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #0b0f19;
+            background-image: radial-gradient(rgba(239, 68, 68, 0.15) 1px, transparent 1px), radial-gradient(rgba(59, 130, 246, 0.1) 1px, #0b0f19 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-card {
+                border: 1px solid #cbd5e1 !important;
+                background: #f8fafc !important;
+                color: #0f172a !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 min-h-screen selection:bg-red-500 selection:text-white">
+
+    <!-- Top Announcement Bar / Theme Banner -->
+    <div class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white text-xs sm:text-sm font-semibold py-2 px-4 text-center tracking-wide shadow-md no-print">
+        <i class="fa-solid fa-fire mr-2"></i> Tema: <span class="italic font-bold">"Merawat Ingatan, Menjaga Persaudaraan, Menata Masa Depan"</span>
+    </div>
+
+    <!-- Hero Header -->
+    <header class="hero-pattern border-b border-red-900/30 py-12 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f19]/80 to-[#0b0f19]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-red-600/10 text-red-400 border border-red-500/20 text-xs font-bold tracking-wider px-3.5 py-1.5 rounded-full uppercase mb-4 shadow-sm">
+                <i class="fa-solid fa-shield-halved"></i> Karang Taruna Kelurahan Pekojan
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-3">
+                PEKOJAN FEST <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">SUMPAH PEMUDA</span>
+            </h1>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-8">
+                Rundown Resmi Rangkaian Acara Festival Kebudayaan, Literasi, Seremonial Sumpah Pemuda, dan Panggung Musik Spektakuler.
+            </p>
+
+            <!-- Search & Filter Controls -->
+            <div class="max-w-xl mx-auto space-y-4 no-print">
+                <!-- Search Bar -->
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="searchInput" onkeyup="filterRundown()" placeholder="Cari kegiatan, pengisi acara, atau band (cth: Reftix, Lurah, Senam)..." class="w-full bg-slate-900/90 border border-slate-800 text-slate-200 text-sm rounded-2xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all shadow-lg placeholder:text-slate-500">
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button onclick="filterCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-red-600 text-white shadow-lg shadow-red-600/25 cursor-pointer">
+                        Semua Acara
+                    </button>
+                    <button onclick="filterCategory('pagi')" id="cat-pagi" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800 cursor-pointer">
+                        ☀️ Pagi & Anak
+                    </button>
+                    <button onclick="filterCategory('sore')" id="cat-sore" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800 cursor-pointer">
+                        🎭 Budaya & Sore
+                    </button>
+                    <button onclick="filterCategory('malam')" id="cat-malam" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800 cursor-pointer">
+                        🕯️ Seremonial
+                    </button>
+                    <button onclick="filterCategory('musik')" id="cat-musik" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800 cursor-pointer">
+                        🎸 Konser Musik
+                    </button>
+                    <button onclick="filterCategory('isoma')" id="cat-isoma" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800 cursor-pointer">
+                        🍽️ ISOMA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Print / Save Button -->
+            <div class="mt-6 flex justify-center no-print">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer shadow-sm">
+                    <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-3xl mx-auto px-4 py-10">
+        
+        <div class="space-y-4" id="rundownContainer">
+
+            <!-- 1. Senam Pagi -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="pagi" data-keywords="senam pagi jam 07.00 warga umum">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">07:00</span>
+                            <span class="block text-[10px] text-slate-400">08:30 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Sesi Warga</span>
+                            <h3 class="text-lg font-bold text-white">Senam Pagi Bersama</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Peserta: Warga Kelurahan Pekojan & Sekitarnya</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Pagi</span>
+                </div>
+            </div>
+
+            <!-- 2. Lomba Mewarnai -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="pagi" data-keywords="lomba mewarnai anak jam 09.00">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">09:00</span>
+                            <span class="block text-[10px] text-slate-400">10:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Kompetisi Anak</span>
+                            <h3 class="text-lg font-bold text-white">Lomba Mewarnai</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Peserta: Anak-Anak Wilayah Pekojan</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Pagi</span>
+                </div>
+            </div>
+
+            <!-- 3. Fashion Show -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="pagi" data-keywords="fashion show jam 10.00">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">10:00</span>
+                            <span class="block text-[10px] text-slate-400">11:30 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Showcase</span>
+                            <h3 class="text-lg font-bold text-white">Fashion Show</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Peserta Fashion Show Kreatif Warga</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Pagi</span>
+                </div>
+            </div>
+
+            <!-- 4. ISOMA Dzuhur -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="isoma" data-keywords="isoma dzuhur jam 11.30 istirahat sholat makan">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-amber-300">11:30</span>
+                            <span class="block text-[10px] text-slate-400">13:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Istirahat</span>
+                            <h3 class="text-lg font-bold text-white">ISOMA (Dzuhur)</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Istirahat, Sholat Dzuhur, & Makan Siang</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-amber-950/60 text-amber-300 border border-amber-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">ISOMA</span>
+                </div>
+            </div>
+
+            <!-- 5. Tari RW 04 -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="sore" data-keywords="tari rw 04 jam 13.00 kesenian budaya">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-blue-300">13:00</span>
+                            <span class="block text-[10px] text-slate-400">13:10 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-blue-400 uppercase tracking-wider">Kesenian Budaya</span>
+                            <h3 class="text-lg font-bold text-white">Tari RW 04</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Penampilan Tari Tradisional Perwakilan RW 04</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-blue-950/60 text-blue-300 border border-blue-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Sore</span>
+                </div>
+            </div>
+
+            <!-- 6. Sambutan Lurah -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="sore" data-keywords="sambutan lurah jam 13.10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-blue-300">13:10</span>
+                            <span class="block text-[10px] text-slate-400">13:30 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-blue-400 uppercase tracking-wider">Seremonial</span>
+                            <h3 class="text-lg font-bold text-white">Sambutan Lurah</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Sambutan Resmi Lurah Kelurahan Pekojan</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-blue-950/60 text-blue-300 border border-blue-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Sore</span>
+                </div>
+            </div>
+
+            <!-- 7. Pembagian Hadiah -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="sore" data-keywords="pembagian hadiah jam 13.30">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-blue-300">13:30</span>
+                            <span class="block text-[10px] text-slate-400">14:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-blue-400 uppercase tracking-wider">Penghargaan</span>
+                            <h3 class="text-lg font-bold text-white">Pembagian Hadiah</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Penyerahan Hadiah Pemenang Lomba</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-blue-950/60 text-blue-300 border border-blue-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Sore</span>
+                </div>
+            </div>
+
+            <!-- 8. Jejak Pekojan / Literasi Pekojan -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm border-l-4 border-l-purple-500" data-category="sore" data-keywords="jejak pekojan literasi pekojan 13.30 pameran sejarah">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-purple-300">13:30</span>
+                            <span class="block text-[10px] text-slate-400">16:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider">Kegiatan Paralel / Pameran</span>
+                            <h3 class="text-lg font-bold text-white">Jejak Pekojan / Literasi Pekojan</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Eksplorasi Sejarah & Literasi Kampung Pekojan</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-purple-950 text-purple-300 border border-purple-800 text-[11px] font-semibold px-2.5 py-1 rounded-md">Paralel</span>
+                </div>
+            </div>
+
+            <!-- 9. ISOMA Ashar -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="isoma" data-keywords="isoma ashar jam 14.40 istirahat sholat">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-amber-300">14:40</span>
+                            <span class="block text-[10px] text-slate-400">15:20 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Istirahat</span>
+                            <h3 class="text-lg font-bold text-white">ISOMA (Ashar)</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Istirahat & Sholat Ashar</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-amber-950/60 text-amber-300 border border-amber-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">ISOMA</span>
+                </div>
+            </div>
+
+            <!-- 10. Pencak Silat -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="sore" data-keywords="pencak silat jam 16.40 seni bela diri">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-blue-300">16:40</span>
+                            <span class="block text-[10px] text-slate-400">17:10 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-blue-400 uppercase tracking-wider">Kesenian Nusantara</span>
+                            <h3 class="text-lg font-bold text-white">Pencak Silat</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Pertunjukan Seni Bela Diri Tradisional</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-blue-950/60 text-blue-300 border border-blue-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Sore</span>
+                </div>
+            </div>
+
+            <!-- 11. ISOMA -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="isoma" data-keywords="isoma jam 17.10 istirahat malam">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-amber-300">17:10</span>
+                            <span class="block text-[10px] text-slate-400">18:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Istirahat</span>
+                            <h3 class="text-lg font-bold text-white">ISOMA (Sore/Maghrib)</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Persiapan Menuju Sesi Malam</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-amber-950/60 text-amber-300 border border-amber-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">ISOMA</span>
+                </div>
+            </div>
+
+            <!-- 12. Sumpah Pemuda -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm border-l-4 border-l-red-500" data-category="malam" data-keywords="pembacaan sumpah pemuda karang taruna kelurahan pekojan jam 18.00">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">18:00</span>
+                            <span class="block text-[10px] text-slate-400">18:50 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Seremonial Utama</span>
+                            <h3 class="text-lg font-bold text-white">Pembacaan Sumpah Pemuda Bersama Karang Taruna Kelurahan Pekojan</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Refleksi Ikrar Pemuda Bersama Karang Taruna</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950 text-red-300 border border-red-900 text-[11px] font-semibold px-2.5 py-1 rounded-md">Malam</span>
+                </div>
+            </div>
+
+            <!-- 13. ISOMA -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="isoma" data-keywords="isoma jam 18.50">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-amber-300">18:50</span>
+                            <span class="block text-[10px] text-slate-400">19:20 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Istirahat</span>
+                            <h3 class="text-lg font-bold text-white">ISOMA (Isya)</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Istirahat & Sholat Isya</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-amber-950/60 text-amber-300 border border-amber-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">ISOMA</span>
+                </div>
+            </div>
+
+            <!-- 14. Tari RW 07 & Seremonial -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="malam" data-keywords="tari rw 07 jam 19.20 mc seremonial sambutan ketua pelaksana">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-emerald-300">19:20</span>
+                            <span class="block text-[10px] text-slate-400">19:30 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">Pembuka Panggung</span>
+                            <h3 class="text-lg font-bold text-white">Tari RW 07 & Seremonial Pembuka</h3>
+                            <p class="text-xs text-slate-400 mt-1">• Tari Tradisional RW 07<br>• MC Seremonial (5 Menit)<br>• Sambutan Ketua Pelaksana (5 Menit)</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-emerald-950 text-emerald-300 border border-emerald-900 text-[11px] font-semibold px-2.5 py-1 rounded-md">Panggung</span>
+                </div>
+            </div>
+
+            <!-- 15. Band Reftix -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="band reftix jam 19.30 musik konser">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">19:30</span>
+                            <span class="block text-[10px] text-slate-400">19:50 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Band Reftix</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 16. Barel Enough -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="barel enough jam 19.50 band musik">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">19:50</span>
+                            <span class="block text-[10px] text-slate-400">20:10 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Barel Enough</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 17. Markalifa Familia -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="markalifa familia jam 20.10 band">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">20:10</span>
+                            <span class="block text-[10px] text-slate-400">20:40 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Markalifa Familia</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 18. Cocononut Trezz -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="cocononut trezz jam 20.40 band reggae">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">20:40</span>
+                            <span class="block text-[10px] text-slate-400">21:40 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Cocononut Trezz</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 19. Band Twilight -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="band twilight jam 21.40">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">21:40</span>
+                            <span class="block text-[10px] text-slate-400">22:00 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Band Twilight</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 20. Coffee Friends -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="coffee friends jam 22.00 band">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">22:00</span>
+                            <span class="block text-[10px] text-slate-400">22:25 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">Coffee Friends</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 21. DJ Amor -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="dj amor jam 22.25 musik dj set">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-indigo-300">22:25</span>
+                            <span class="block text-[10px] text-slate-400">22:45 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-indigo-400 uppercase tracking-wider">Special Performance</span>
+                            <h3 class="text-lg font-bold text-white">DJ Amor</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">DJ Set Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-indigo-950 text-indigo-300 border border-indigo-900 text-[11px] font-semibold px-2.5 py-1 rounded-md">DJ Set</span>
+                </div>
+            </div>
+
+            <!-- 22. MPKT Band -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm" data-category="musik" data-keywords="mpkt band jam 22.45">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-red-300">22:45</span>
+                            <span class="block text-[10px] text-slate-400">23:10 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live Band</span>
+                            <h3 class="text-lg font-bold text-white">MPKT Band</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Panggung Hiburan Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-red-950/60 text-red-300 border border-red-900/50 text-[11px] font-semibold px-2.5 py-1 rounded-md">Musik</span>
+                </div>
+            </div>
+
+            <!-- 23. Band New Testament & Penutup -->
+            <div class="rundown-item print-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition-all shadow-sm border-l-4 border-l-amber-500" data-category="musik" data-keywords="band new testament dan penutup jam 23.10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-xl px-3 py-2 text-center min-w-[95px]">
+                            <span class="block text-xs font-extrabold text-amber-300">23:10</span>
+                            <span class="block text-[10px] text-slate-400">23:40 WIB</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Headliner / Penutup</span>
+                            <h3 class="text-lg font-bold text-white">Band New Testament & Penutup Acara</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Penampilan Penutup & Closing Ceremonial Pekojan Fest</p>
+                        </div>
+                    </div>
+                    <span class="self-start sm:self-center bg-amber-950 text-amber-300 border border-amber-900 text-[11px] font-semibold px-2.5 py-1 rounded-md">Penutup</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty State Search Not Found -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="text-4xl mb-3 text-slate-600">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-300">Kegiatan tidak ditemukan</h3>
+            <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 space-y-2">
+        <p class="font-semibold text-slate-400">Pekojan Fest Sumpah Pemuda 2026</p>
+        <p>© Karang Taruna Kelurahan Pekojan • Seluruh Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <!-- Interactive JS Script -->
+    <script>
+        let currentCategory = 'all';
+
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // Highlight active button
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-red-600', 'text-white', 'shadow-lg', 'shadow-red-600/25');
+                btn.classList.add('bg-slate-900/80', 'text-slate-300', 'border', 'border-slate-800');
+            });
+
+            const activeBtn = document.getElementById(`cat-${category}`);
+            activeBtn.classList.remove('bg-slate-900/80', 'text-slate-300', 'border', 'border-slate-800');
+            activeBtn.classList.add('bg-red-600', 'text-white', 'shadow-lg', 'shadow-red-600/25');
+
+            applyFilters();
+        }
+
+        function filterRundown() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const items = document.querySelectorAll('.rundown-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const keywords = item.getAttribute('data-keywords');
+                const textContent = item.innerText.toLowerCase();
+
+                const matchesCategory = (currentCategory === 'all' || itemCat === currentCategory);
+                const matchesSearch = (query === '' || keywords.includes(query) || textContent.includes(query));
+
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const noResultsEl = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResultsEl.classList.remove('hidden');
+            } else {
+                noResultsEl.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
